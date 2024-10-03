@@ -12,5 +12,5 @@ public interface PostRepository {
 
     Post save(Post post);
 
-    boolean removeById(long id);
+    void removeById(long id);
 }
