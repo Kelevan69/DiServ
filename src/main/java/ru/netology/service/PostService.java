@@ -30,11 +30,6 @@ public class PostService {
     }
 
     public boolean removeById(long id) {
-        Optional<Post> post = repository.getById(id);
-        if (post.isPresent()) {
-            repository.removeById(id);
-            return true;
-        }
-        return false;
+        return repository.removeById(id);
     }
 }

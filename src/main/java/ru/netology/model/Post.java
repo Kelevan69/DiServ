@@ -4,9 +4,6 @@ public class Post {
     private long id;
     private String content;
 
-    public Post() {
-    }
-
     public Post(long id, String content) {
         this.id = id;
         this.content = content;
@@ -30,9 +27,6 @@ public class Post {
 
     @Override
     public String toString() {
-        return "Post{" +
-                "id=" + id +
-                ", content='" + content + '\'' +
-                '}';
+        return "Post{id=" + id + ", content='" + content + "'}";
     }
 }

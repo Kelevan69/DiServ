@@ -1,15 +1,14 @@
 package ru.netology.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 import ru.netology.model.Post;
 import ru.netology.service.PostService;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@Controller
+@RestController
 public class PostController {
     private final PostService service;
 
@@ -26,7 +25,7 @@ public class PostController {
     }
 
     public void getById(long id, HttpServletResponse response) throws IOException {
-        var post = service.getById(id);
+        final var post = service.getById(id);
         if (post.isPresent()) {
             response.setContentType("application/json");
             try (var writer = response.getWriter()) {
@@ -37,13 +36,10 @@ public class PostController {
         }
     }
 
-    public void save(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        var post = new Post(0, request.getReader().readLine()); // Simplified for demo purposes
-        var savedPost = service.save(post);
-        response.setContentType("application/json");
-        try (var writer = response.getWriter()) {
-            writer.write(savedPost.toString());
-        }
+    public void save(String body, HttpServletResponse response) throws IOException {
+        final var post = new Post(0, body); // Заглушка
+        service.save(post);
+        response.setStatus(HttpServletResponse.SC_OK);
     }
 
     public void removeById(long id, HttpServletResponse response) {
